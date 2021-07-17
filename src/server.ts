@@ -2,87 +2,31 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import express, { Application } from 'express';
 
-const callback = (
-  request: http.IncomingMessage,
-  response: http.ServerResponse
-) => {
-  console.log('Origin request', request.url);
-  console.log('Origin method', request.method);
-  const url = request.url.trim().toLowerCase();
-  const method = request.method.trim().toLowerCase();
+const app: Application = express();
 
-  const paths = [
+app.get('/users', (req, res) => {
+  const users = [
     {
-      url: '/home',
-      method: 'get',
-      execute: (req: http.IncomingMessage, res: http.ServerResponse) => {
-        response.setHeader('content-type', 'text/plain');
-        response.writeHead(200);
-        response.write('Home');
-        response.end();
-      },
+      username: 'user01',
     },
-    {
-      url: '/users',
-      method: 'get',
-      execute: (req: http.IncomingMessage, res: http.ServerResponse) => {
-        response.setHeader('content-type', 'application/json');
-        response.writeHead(200);
-        response.write("[{username: 'user01'}, {username: 'user02'}]");
-        response.end();
-      },
-    },
-    {
-      url: '/users',
-      method: 'post',
-      execute: (req: http.IncomingMessage, res: http.ServerResponse) => {
-        response.setHeader('content-type', 'text/plain');
-        response.writeHead(200);
-        response.write('User inserted');
-        response.end();
-      },
-    },
-    {
-      url: '/download',
-      method: 'get',
-      execute: (req: http.IncomingMessage, res: http.ServerResponse) => {
-        response.setHeader(
-          'content-disposition',
-          'attachment;filename=users.csv'
-        );
-        response.writeHead(200);
-        response.write('username,firstname\nuser01,Sergio\nuser02,Javier');
-        response.end();
-      },
-    },
-    {
-      url: '/pdf',
-      method: 'get',
-      execute: (req: http.IncomingMessage, res: http.ServerResponse) => {
-        const pathFile = path.join(__dirname, '../', 'public/manual.pdf');
-        response.setHeader('content-type', 'application/pdf');
-        const result = fs.readFileSync(pathFile);
-        response.writeHead(200);
-        response.write(result);
-        response.end();
-      },
-    },
+    { username: 'user02' },
   ];
 
-  const pathSelected = paths.find(
-    (el) => el.url === url && el.method === method
-  );
-  if (pathSelected) {
-    pathSelected.execute(request, response);
-  } else {
-    response.setHeader('content-type', 'text/plain');
-    response.writeHead(404);
-    response.write('Path not found');
-    response.end();
-  }
-};
+  res.json(users);
 
-const server: http.Server = http.createServer(callback);
+  //res.setHeader('content-type', 'application/json');
+  // res.writeHead(200);
+  //res.statusCode = 200;
+  //res.write(JSON.stringify(users));
+  //res.end();
+});
 
-server.listen(3000);
+app.post('/users', (req, res) => {
+  res.status(201).send('User inserted');
+});
+
+const server = http.createServer(app);
+server.listen(3000, () => console.log('Server is running on port 3000'));
+// app.listen(3000, () => console.log('Server is running on port 3000'));
