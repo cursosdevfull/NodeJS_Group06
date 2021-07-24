@@ -1,3 +1,4 @@
+import { UserRequestDto } from '../application/user.dto';
 import { UserRepository } from '../application/user.repository';
 import { UserModel } from '../domain/user.model';
 
@@ -10,7 +11,7 @@ export class UserOperation implements UserRepository {
       email: 'correo01@correo.com',
       password: '123',
       photo: 'foto.jgp',
-      roles: ['OPERATOR'],
+      roles: [{ id: 1, name: 'OPERATOR' }],
     });
   }
   getPage(page: number): Promise<{ data: UserModel[]; total: number }> {
@@ -22,7 +23,7 @@ export class UserOperation implements UserRepository {
           email: 'correo01@correo.com',
           password: '123',
           photo: 'foto.jgp',
-          roles: ['OPERATOR'],
+          roles: [{ id: 1, name: 'OPERATOR' }],
         },
         {
           id: 2,
@@ -30,7 +31,7 @@ export class UserOperation implements UserRepository {
           email: 'correo02@correo.com',
           password: '123',
           photo: 'foto.jgp',
-          roles: ['ADMIN'],
+          roles: [{ id: 1, name: 'OPERATOR' }],
         },
       ],
       total: 2,
@@ -43,7 +44,7 @@ export class UserOperation implements UserRepository {
       email: 'correo01@correo.com',
       password: '123',
       photo: 'foto.jgp',
-      roles: ['OPERATOR'],
+      roles: [{ id: 1, name: 'OPERATOR' }],
     });
   }
   delete(id: number): Promise<UserModel> {
@@ -53,7 +54,7 @@ export class UserOperation implements UserRepository {
       email: 'correo02@correo.com',
       password: '123',
       photo: 'foto.jgp',
-      roles: ['ADMIN'],
+      roles: [{ id: 1, name: 'OPERATOR' }],
     });
   }
   list(): Promise<UserModel[]> {
@@ -64,7 +65,7 @@ export class UserOperation implements UserRepository {
         email: 'correo01@correo.com',
         password: '123',
         photo: 'foto.jgp',
-        roles: ['OPERATOR'],
+        roles: [{ id: 1, name: 'OPERATOR' }],
       },
       {
         id: 2,
@@ -72,11 +73,18 @@ export class UserOperation implements UserRepository {
         email: 'correo02@correo.com',
         password: '123',
         photo: 'foto.jgp',
-        roles: ['ADMIN'],
+        roles: [{ id: 2, name: 'ADMIN' }],
       },
     ]);
   }
-  insert(user: Omit<UserModel, 'id'>): Promise<UserModel> {
-    return Promise.resolve({ id: 3, ...user } as UserModel);
+  insert(user: Omit<UserRequestDto, 'id'>): Promise<UserModel> {
+    return Promise.resolve({
+      id: 2,
+      name: 'Marcela',
+      email: 'correo02@correo.com',
+      password: '123',
+      photo: 'foto.jgp',
+      roles: [{ id: 2, name: 'ADMIN' }],
+    } as UserModel);
   }
 }

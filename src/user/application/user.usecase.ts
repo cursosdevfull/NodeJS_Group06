@@ -2,7 +2,7 @@ import { Result } from '../../shared/application/result.repository';
 import { ResponseDto } from '../../shared/helpers/response.dto';
 import { generateTrace } from '../../shared/helpers/trace';
 import { UserModel } from '../domain/user.model';
-import { mappingUserDto, UserResponseDto } from './user.dto';
+import { mappingUserDto, UserRequestDto, UserResponseDto } from './user.dto';
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
@@ -62,7 +62,9 @@ export class UserUseCase {
     );
   }
 
-  async insert(user: Omit<UserModel, 'id'>): Promise<Result<UserResponseDto>> {
+  async insert(
+    user: Omit<UserRequestDto, 'id'>
+  ): Promise<Result<UserResponseDto>> {
     const newUser = Object.assign({}, user);
     newUser.password = await UserService.cryptPassword(newUser.password);
 

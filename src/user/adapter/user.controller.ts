@@ -4,7 +4,7 @@ import { UserOperation } from '../infraestructure/user.operation';
 import { UserModel } from '../domain/user.model';
 import { UserRepository } from '../application/user.repository';
 import { Result } from '../../shared/application/result.repository';
-import { UserResponseDto } from '../application/user.dto';
+import { UserRequestDto, UserResponseDto } from '../application/user.dto';
 
 const userOperation: UserRepository = new UserOperation();
 const userUseCase = new UserUseCase(userOperation);
@@ -38,12 +38,12 @@ export class UserController {
   }
 
   async insert(request: Request, response: Response) {
-    const user: Omit<UserModel, 'id'> = {
+    const user: Omit<UserRequestDto, 'id'> = {
       name: 'Andrea',
       email: 'correo03@correo.com',
       password: '123',
       photo: 'andrea.jpg',
-      roles: ['MEDIC'],
+      roles: [1, 2],
     };
     const result: Result<UserResponseDto> = await userUseCase.insert(user);
     response.json(result);
