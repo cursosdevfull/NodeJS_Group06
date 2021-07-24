@@ -12,5 +12,8 @@
     "outDir": "./cache"
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "paths": {
+    "@user/*": ["./src/user/*"]
+  }
 }

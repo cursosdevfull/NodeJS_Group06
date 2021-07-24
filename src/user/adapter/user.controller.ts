@@ -3,17 +3,19 @@ import { UserUseCase } from '../application/user.usecase';
 import { UserOperation } from '../infraestructure/user.operation';
 import { UserModel } from '../domain/user.model';
 import { UserRepository } from '../application/user.repository';
+import { Result } from '../../shared/application/result.repository';
+import { UserResponseDto } from '../application/user.dto';
 
 const userOperation: UserRepository = new UserOperation();
 const userUseCase = new UserUseCase(userOperation);
 export class UserController {
   async list(request: Request, response: Response) {
-    const result: UserModel[] = await userUseCase.list();
+    const result: Result<UserResponseDto> = await userUseCase.list();
     response.json(result);
   }
 
   async getOne(request: Request, response: Response) {
-    const result: UserModel = await userUseCase.getOne(1);
+    const result: Result<UserResponseDto> = await userUseCase.getOne(1);
     response.json(result);
   }
 
@@ -21,17 +23,17 @@ export class UserController {
     const user: Partial<UserModel> = {
       photo: 'andrea.jpg',
     };
-    const result: UserModel = await userUseCase.update(1, user);
+    const result: Result<UserResponseDto> = await userUseCase.update(1, user);
     response.json(result);
   }
 
   async delete(request: Request, response: Response) {
-    const result: UserModel = await userUseCase.delete(1);
+    const result: Result<UserResponseDto> = await userUseCase.delete(1);
     response.json(result);
   }
 
   async getPage(request: Request, response: Response) {
-    const result: UserModel[] = await userUseCase.getPage(1);
+    const result: Result<UserResponseDto> = await userUseCase.getPage(1);
     response.json(result);
   }
 
@@ -43,7 +45,7 @@ export class UserController {
       photo: 'andrea.jpg',
       roles: ['MEDIC'],
     };
-    const result: UserModel = await userUseCase.insert(user);
+    const result: Result<UserResponseDto> = await userUseCase.insert(user);
     response.json(result);
   }
 }

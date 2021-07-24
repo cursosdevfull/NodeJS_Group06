@@ -13,25 +13,28 @@ export class UserOperation implements UserRepository {
       roles: ['OPERATOR'],
     });
   }
-  getPage(page: number): Promise<UserModel[]> {
-    return Promise.resolve([
-      {
-        id: 1,
-        name: 'Janet',
-        email: 'correo01@correo.com',
-        password: '123',
-        photo: 'foto.jgp',
-        roles: ['OPERATOR'],
-      },
-      {
-        id: 2,
-        name: 'Marcela',
-        email: 'correo02@correo.com',
-        password: '123',
-        photo: 'foto.jgp',
-        roles: ['ADMIN'],
-      },
-    ]);
+  getPage(page: number): Promise<{ data: UserModel[]; total: number }> {
+    return Promise.resolve({
+      data: [
+        {
+          id: 1,
+          name: 'Janet',
+          email: 'correo01@correo.com',
+          password: '123',
+          photo: 'foto.jgp',
+          roles: ['OPERATOR'],
+        },
+        {
+          id: 2,
+          name: 'Marcela',
+          email: 'correo02@correo.com',
+          password: '123',
+          photo: 'foto.jgp',
+          roles: ['ADMIN'],
+        },
+      ],
+      total: 2,
+    });
   }
   update(id: number, user: Partial<UserModel>): Promise<UserModel> {
     return Promise.resolve({
