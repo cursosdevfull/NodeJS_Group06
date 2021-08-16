@@ -2,4 +2,9 @@ node_modules
 cache
 reports
 dist
-public/**/*.pdf
+public
+docker
+src 
+test
+*.json
+README.md
