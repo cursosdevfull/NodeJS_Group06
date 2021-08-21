@@ -1,22 +1,28 @@
 import { Application } from 'express';
 import { IServerBootstrap } from './server.interface';
 import http from 'http';
-import app from '../app';
-import { ServerAbstract } from './server.abstract';
+import yenv from 'yenv';
+import { AddressInfo } from 'net';
 
-// export class ServerBootstrap implements IServerBootstrap {
-export class ServerBootstrap extends ServerAbstract {
-  constructor(private app: Application) {
-    super();
-  }
+const env = yenv();
+
+interface Address extends AddressInfo {
+  port: number;
+}
+
+export class ServerBootstrap implements IServerBootstrap {
+  constructor(private app: Application) {}
 
   initialize(): Promise<any> {
     return new Promise((resolve, reject) => {
-      const server = http.createServer(app);
+      const server = http.createServer(this.app);
+
       server
-        .listen(3000)
+        .listen(env.PORT)
         .on('listening', () => {
-          console.log('Server is running on port 3000');
+          console.log(
+            `Server is running on port ${(server.address() as Address).port}`
+          );
           resolve(true);
         })
         .on('error', (error) => {
