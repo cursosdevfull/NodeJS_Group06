@@ -15,33 +15,38 @@ export class MedicController {
   }
 
   async getOne(request: Request, response: Response) {
-    const result: Result<MedicResponseDto> = await medicUseCase.getOne(1);
+    const id: number = +request.params.id;
+    const result: Result<MedicResponseDto> = await medicUseCase.getOne(id);
     response.json(result);
   }
 
   async update(request: Request, response: Response) {
-    const user: Partial<MedicModel> = {
-      lastname: 'hidalgo',
-    };
-    const result: Result<MedicResponseDto> = await medicUseCase.update(1, user);
+    const user: Partial<MedicModel> = request.body;
+    const id: number = +request.params.id;
+    const result: Result<MedicResponseDto> = await medicUseCase.update(
+      id,
+      user
+    );
     response.json(result);
   }
 
   async delete(request: Request, response: Response) {
-    const result: Result<MedicResponseDto> = await medicUseCase.delete(1);
+    const id: number = +request.params.id;
+    const result: Result<MedicResponseDto> = await medicUseCase.delete(id);
     response.json(result);
   }
 
   async getPage(request: Request, response: Response) {
-    const result: Result<MedicResponseDto> = await medicUseCase.getPage(1);
+    const page: number = +request.params.page;
+    const result: Result<MedicResponseDto> = await medicUseCase.getPage(page);
     response.json(result);
   }
 
   async insert(request: Request, response: Response) {
-    const medic: Omit<MedicModel, 'id'> = {
-      name: 'Andrea',
-      lastname: 'Veliz',
-      identifier: '123',
+    const medic: Partial<MedicModel> = {
+      name: request.body.name,
+      lastname: request.body.lastname,
+      identifier: request.body.identifier,
     };
     const result: Result<MedicResponseDto> = await medicUseCase.insert(medic);
     response.json(result);

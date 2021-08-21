@@ -1,4 +1,6 @@
-import { BaseClass } from '../../shared/application/base.class';
-import { MedicModel } from '../domain/medic.model';
+import { MedicEntity } from '../../entities/medic.entity';
+import { RepositoryBase } from '../../shared/application/base.repository';
 
-export interface MedicRepository extends BaseClass<MedicModel, MedicModel> {}
+export interface MedicRepository extends RepositoryBase<MedicEntity> {
+  report(): Promise<MedicEntity[]>;
+}

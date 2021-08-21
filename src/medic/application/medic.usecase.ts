@@ -10,7 +10,7 @@ export class MedicUseCase {
 
   async list(): Promise<Result<MedicResponseDto>> {
     const traceId = generateTrace();
-    const result: MedicModel[] = await this.operation.list();
+    const result: MedicModel[] = await this.operation.list({}, [], {});
 
     return ResponseDto.format<MedicResponseDto>(
       traceId,
@@ -61,10 +61,9 @@ export class MedicUseCase {
     );
   }
 
-  async insert(
-    medic: Omit<MedicModel, 'id'>
-  ): Promise<Result<MedicResponseDto>> {
+  async insert(medic: Partial<MedicModel>): Promise<Result<MedicResponseDto>> {
     const traceId = generateTrace();
+
     const result: MedicModel = await this.operation.insert(medic);
 
     return ResponseDto.format<MedicResponseDto>(
