@@ -34,10 +34,10 @@ export class MedicUseCase {
 
   async update(
     id: number,
-    user: Partial<MedicModel>
+    medic: Partial<MedicModel>
   ): Promise<Result<MedicResponseDto>> {
     const traceId = generateTrace();
-    const result: MedicModel = await this.operation.update(id, user);
+    const result: MedicModel = await this.operation.update(id, medic);
 
     return ResponseDto.format<MedicResponseDto>(
       traceId,

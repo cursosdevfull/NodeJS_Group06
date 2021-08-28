@@ -59,8 +59,12 @@ export abstract class OperationRepository<T> {
   }
 
   async insert(entity: T): Promise<T> {
-    const repository: Repository<T> = getRepository(this.entity);
-    const data: T = await repository.save(entity);
-    return data;
+    try {
+      const repository: Repository<T> = getRepository(this.entity);
+      const data: T = await repository.save(entity);
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }

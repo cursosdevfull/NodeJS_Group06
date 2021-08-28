@@ -23,7 +23,6 @@ export const schemas = {
   }),
 
   INSERT: Joi.object({
-    id: Joi.number().integer().required(),
     name: Joi.string().required(),
     email: Joi.string().required(),
     password: Joi.string().required(),

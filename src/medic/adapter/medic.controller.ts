@@ -21,11 +21,11 @@ export class MedicController {
   }
 
   async update(request: Request, response: Response) {
-    const user: Partial<MedicModel> = request.body;
+    const medic: Partial<MedicModel> = request.body;
     const id: number = +request.params.id;
     const result: Result<MedicResponseDto> = await medicUseCase.update(
       id,
-      user
+      medic
     );
     response.json(result);
   }

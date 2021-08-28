@@ -13,7 +13,7 @@ route.post(
   '/',
   mergeParameters(),
   validator(schemas.INSERT),
-  ErrorHandler.asyncError(userController.insert)
+  userController.insert
 );
 route.get(
   '/page/:page',

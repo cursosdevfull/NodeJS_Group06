@@ -1,3 +1,5 @@
+import { RoleRepository } from '../../role/application/role.repository';
+import { RoleModel } from '../../role/domain/role.model';
 import { Result } from '../../shared/application/result.repository';
 import { ResponseDto } from '../../shared/helpers/response.dto';
 import { generateTrace } from '../../shared/helpers/trace';
@@ -7,11 +9,14 @@ import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
 export class UserUseCase {
-  constructor(private operation: UserRepository) {}
+  constructor(
+    private operation: UserRepository,
+    private operationRoles: RoleRepository
+  ) {}
 
   async list(): Promise<Result<UserResponseDto>> {
     const traceId = generateTrace();
-    const result: UserModel[] = await this.operation.list();
+    const result: UserModel[] = await this.operation.list({}, [], {});
 
     return ResponseDto.format<UserResponseDto>(
       traceId,
@@ -62,11 +67,21 @@ export class UserUseCase {
     );
   }
 
-  async insert(
-    user: Omit<UserRequestDto, 'id'>
-  ): Promise<Result<UserResponseDto>> {
+  async insert(user: Partial<UserModel>): Promise<Result<UserResponseDto>> {
     const newUser = Object.assign({}, user);
     newUser.password = await UserService.cryptPassword(newUser.password);
+    newUser.refreshToken = UserService.generateRefreshToken();
+
+    const listRoles: any[] = [];
+    newUser.roles.forEach((roleId) => {
+      listRoles.push(this.operationRoles.getOne(+roleId));
+    });
+
+    const roles = await Promise.all(listRoles);
+
+    newUser.roles = roles;
+
+    console.log('user', newUser);
 
     const traceId = generateTrace();
     const result: UserModel = await this.operation.insert(newUser);

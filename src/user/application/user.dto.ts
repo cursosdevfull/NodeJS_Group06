@@ -21,7 +21,7 @@ export const mappingUserDto = (
         id,
         name,
         email,
-        roles: roles.map((el: RoleModel) => el.name),
+        roles: roles.map((el: any) => el.name),
         photo,
       });
       return accum;
@@ -32,7 +32,7 @@ export const mappingUserDto = (
       id,
       name,
       email,
-      roles: roles.map((el: RoleModel) => el.name),
+      roles: roles.map((el: any) => el.name),
       photo,
     };
   }

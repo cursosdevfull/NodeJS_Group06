@@ -5,9 +5,12 @@ import { UserModel } from '../domain/user.model';
 import { UserRepository } from '../application/user.repository';
 import { Result } from '../../shared/application/result.repository';
 import { UserRequestDto, UserResponseDto } from '../application/user.dto';
+import { RoleRepository } from '../../role/application/role.repository';
+import { RoleOperation } from '../../role/infraestructure/role.operation';
 
 const userOperation: UserRepository = new UserOperation();
-const userUseCase = new UserUseCase(userOperation);
+const roleOperation: RoleRepository = new RoleOperation();
+const userUseCase = new UserUseCase(userOperation, roleOperation);
 export class UserController {
   async list(request: Request, response: Response) {
     const result: Result<UserResponseDto> = await userUseCase.list();
@@ -16,16 +19,14 @@ export class UserController {
 
   async getOne(request: Request, response: Response) {
     const id = +request.params.id;
-    console.log('id', id);
     const result: Result<UserResponseDto> = await userUseCase.getOne(id);
     response.json(result);
   }
 
   async update(request: Request, response: Response) {
-    const user: Partial<UserModel> = {
-      photo: 'andrea.jpg',
-    };
-    const result: Result<UserResponseDto> = await userUseCase.update(1, user);
+    const user: Partial<UserModel> = request.body;
+    const id: number = +request.params.id;
+    const result: Result<UserResponseDto> = await userUseCase.update(id, user);
     response.json(result);
   }
 
@@ -37,27 +38,17 @@ export class UserController {
 
   async getPage(request: Request, response: Response) {
     const page = +request.params.page;
-    const result: Result<UserResponseDto> = await userUseCase.getPage(1);
+    const result: Result<UserResponseDto> = await userUseCase.getPage(page);
     response.json(result);
   }
 
   async insert(request: Request, response: Response) {
-    console.log(request.body);
-    /*     const name = request.body.name
-    const email = request.body.email 
-    const password = request.body.password
-    const photo = request.body.photo 
-    const roles = request.body.roles */
-    const { name, email, password, photo, roles } = request.body;
-
-    console.log({ name, email, password, photo, roles });
-
-    const user: Omit<UserRequestDto, 'id'> = {
-      name: 'Andrea',
-      email: 'correo03@correo.com',
-      password: '123',
-      photo: 'andrea.jpg',
-      roles: [1, 2],
+    const user: Partial<UserModel> = {
+      name: request.body.name,
+      email: request.body.email,
+      password: request.body.password,
+      photo: request.body.photo,
+      roles: request.body.roles,
     };
     const result: Result<UserResponseDto> = await userUseCase.insert(user);
     response.json(result);

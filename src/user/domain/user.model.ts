@@ -6,5 +6,6 @@ export interface UserModel {
   email: string;
   password: string;
   photo: string;
+  refreshToken: string;
   roles: RoleModel[];
 }
