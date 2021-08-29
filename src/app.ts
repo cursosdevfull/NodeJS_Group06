@@ -3,6 +3,7 @@ import { route as RouteUser } from './user/adapter/user.route';
 import { route as RouteMedic } from './medic/adapter/medic.route';
 import { route as RouteDriver } from './driver/adapter/driver.route';
 import { route as RouteRole } from './role/adapter/role.route';
+import { route as RouteAuth } from './auth/adapter/auth.route';
 import { ErrorHandler } from './shared/helpers/errors.handler';
 
 const app: Application = express();
@@ -16,6 +17,7 @@ app.use('/users', RouteUser);
 app.use('/medics', RouteMedic);
 app.use('/drivers', RouteDriver);
 app.use('/roles', RouteRole);
+app.use('/auth', RouteAuth);
 
 // Manejo de excepciones
 

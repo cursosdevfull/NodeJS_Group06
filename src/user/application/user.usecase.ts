@@ -16,7 +16,7 @@ export class UserUseCase {
 
   async list(): Promise<Result<UserResponseDto>> {
     const traceId = generateTrace();
-    const result: UserModel[] = await this.operation.list({}, [], {});
+    const result: UserModel[] = await this.operation.list({}, ['roles'], {});
 
     return ResponseDto.format<UserResponseDto>(
       traceId,
@@ -80,8 +80,6 @@ export class UserUseCase {
     const roles = await Promise.all(listRoles);
 
     newUser.roles = roles;
-
-    console.log('user', newUser);
 
     const traceId = generateTrace();
     const result: UserModel = await this.operation.insert(newUser);

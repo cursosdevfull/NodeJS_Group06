@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinTable,
-  ManyToOne,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { RoleEntity } from './role.entity';
@@ -18,7 +18,7 @@ export class UserEntity {
   @Column({ type: 'varchar', length: 100 })
   email: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 60 })
   password: string;
 
   @Column({ type: 'varchar', length: 100 })
@@ -27,7 +27,7 @@ export class UserEntity {
   @Column({ type: 'varchar', length: 100 })
   refreshToken: string;
 
-  @ManyToOne((type) => RoleEntity)
+  @ManyToMany((type) => RoleEntity)
   @JoinTable()
   roles: RoleEntity[];
 }

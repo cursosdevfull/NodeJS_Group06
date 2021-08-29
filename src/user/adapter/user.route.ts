@@ -1,4 +1,5 @@
 import express from 'express';
+import { AuthenticationGuard } from '../../shared/guards/authentication.guard';
 import { ErrorHandler, IError } from '../../shared/helpers/errors.handler';
 import { mergeParameters } from '../../shared/helpers/parameters.handler';
 import { validator } from '../../shared/helpers/validator.handler';
@@ -8,7 +9,7 @@ import { schemas } from './user.schema';
 const route = express.Router();
 const userController = new UserController();
 
-route.get('/', ErrorHandler.asyncError(userController.list));
+route.get('/', AuthenticationGuard.canActivate, userController.list);
 route.post(
   '/',
   mergeParameters(),
