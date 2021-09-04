@@ -52,7 +52,5 @@ export class ErrorHandler {
     res
       .status(error.status)
       .json(ResponseDto.format<IError>(error.traceId, objError, 1, 'Error'));
-
-    // res.status(error.status).json(objError);
   }
 }

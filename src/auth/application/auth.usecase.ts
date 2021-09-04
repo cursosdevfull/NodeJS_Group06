@@ -25,11 +25,6 @@ export class AuthUseCase {
           user.roles.map((role) => role.name)
         );
 
-        console.log('tokens', {
-          accessToken,
-          refreshToken: user.refreshToken,
-        });
-
         return { accessToken, refreshToken: user.refreshToken };
       }
       return null;

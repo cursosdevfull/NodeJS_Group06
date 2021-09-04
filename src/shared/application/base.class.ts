@@ -1,4 +1,4 @@
-import { GeneralRepository, GenericRepository } from './base.repository';
+/* import { GeneralRepository, GenericRepository } from './base.repository';
 
 export abstract class BaseClass<T, U>
   implements GenericRepository<T, U>, GeneralRepository<T>
@@ -9,4 +9,4 @@ export abstract class BaseClass<T, U>
   abstract delete(id: number): Promise<T>;
   abstract list(): Promise<T[]>;
   abstract getPage(page: number): Promise<{ data: T[]; total: number }>;
-}
+} */

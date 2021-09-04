@@ -1,5 +1,7 @@
-import { RoleModel } from '../../role/domain/role.model';
 import { UserModel } from '../domain/user.model';
+import yenv from 'yenv';
+
+const env = yenv();
 
 export interface UserResponseDto {
   id: number;
@@ -22,7 +24,7 @@ export const mappingUserDto = (
         name,
         email,
         roles: roles.map((el: any) => el.name),
-        photo,
+        photo: env.S3.PATH + '/' + photo,
       });
       return accum;
     }, []);
@@ -33,7 +35,7 @@ export const mappingUserDto = (
       name,
       email,
       roles: roles.map((el: any) => el.name),
-      photo,
+      photo: env.S3.PATH + '/' + photo,
     };
   }
 };

@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node index",
     "ts-start": "ts-node src/server.ts",
-    "build": "tsc",
-    "develop": "nodemon src/server.ts"
+    "build": "tsc && gulp minify",
+    "develop": "nodemon src/server.ts",
+    "serve": "cross-env NODE_ENV=production node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,15 @@
   },
   "homepage": "https://github.com/cursosdevfull/NodeJS_Group06#readme",
   "dependencies": {
+    "aws-sdk": "^2.983.0",
     "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "joi": "^17.4.1",
     "jwt-simple": "^0.5.6",
     "moment": "^2.29.1",
+    "multer": "^1.4.3",
+    "multer-s3": "^2.9.0",
     "mysql2": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.37",
@@ -39,8 +44,12 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/joi": "^17.2.3",
+    "@types/multer": "^1.4.7",
+    "@types/multer-s3": "^2.7.10",
     "@types/node": "^16.3.1",
     "@types/uuid": "^8.3.1",
+    "gulp": "^4.0.2",
+    "gulp-uglify-es": "^3.0.0",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.12",
     "ts-node": "^10.1.0",

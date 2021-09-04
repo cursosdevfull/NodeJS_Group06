@@ -13,20 +13,19 @@ export class AuthenticationGuard {
       if (partsAuthentication.length > 1) {
         const accessToken = partsAuthentication[1];
 
+        console.log('accessToken', accessToken);
+
         UserService.validateAccessToken(accessToken).then(
           (payload) => {
+            response.locals.payload = payload;
             next();
           },
           (error) => {
-            if (error.status === 401) {
-              const error: IError = new Error('Usuario no autorizado');
-              error.status = 401;
-              next(error);
-            } else if (error.status === 409) {
-              const error: IError = new Error('Token expirado');
-              error.status = 409;
-              next(error);
-            }
+            const messageError =
+              error.status === 401 ? 'Usuario no autorizado' : 'Token expirado';
+            const err: IError = new Error(messageError);
+            err.status = error.status;
+            next(err);
           }
         );
       }

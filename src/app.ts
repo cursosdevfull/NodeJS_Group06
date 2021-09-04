@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import { route as RouteUser } from './user/adapter/user.route';
 import { route as RouteMedic } from './medic/adapter/medic.route';
 import { route as RouteDriver } from './driver/adapter/driver.route';
@@ -18,6 +18,8 @@ app.use('/medics', RouteMedic);
 app.use('/drivers', RouteDriver);
 app.use('/roles', RouteRole);
 app.use('/auth', RouteAuth);
+
+app.get('/health', (req: Request, res: Response) => res.send('Todo está ok'));
 
 // Manejo de excepciones
 
