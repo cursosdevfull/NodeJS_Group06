@@ -19,7 +19,7 @@ app.use('/drivers', RouteDriver);
 app.use('/roles', RouteRole);
 app.use('/auth', RouteAuth);
 
-app.get('/health', (req: Request, res: Response) => res.send('Todo está ok'));
+app.get('/health', (req: Request, res: Response) => res.send('Todo está bien'));
 
 // Manejo de excepciones
 
