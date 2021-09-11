@@ -6,8 +6,11 @@ services:
     container_name: appnodejs
     ports:
       - '5000:80'
+    restart: always
     depends_on:
       - mysql
+    networks:
+      - mired
 
   mysql:
     image: mysql:5.7
@@ -18,3 +21,8 @@ services:
       MYSQL_USER: 'test'
       MYSQL_PASSWORD: 'test'
       MYSQL_DATABASE: 'test'
+    networks:
+      - mired
+
+networks:
+  mired:
