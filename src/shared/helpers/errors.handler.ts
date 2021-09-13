@@ -21,9 +21,7 @@ export class ErrorHandler {
   ) {
     return (req: Request, res: Response, next: NextFunction) => {
       ftn(req, res, next).catch((err) => {
-        let error: IError;
-
-        error = new Error('Async Error');
+        const error: IError = new Error('Async Error');
         error.message = err.message;
         error.stack = err.stack;
         error.status = err.status;

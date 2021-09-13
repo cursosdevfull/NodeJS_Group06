@@ -28,16 +28,15 @@ export const mappingUserDto = (
       });
       return accum;
     }, []);
-  } else {
-    const { id, name, email, roles, photo } = data as UserModel;
-    return {
-      id,
-      name,
-      email,
-      roles: roles.map((el: any) => el.name),
-      photo: env.S3.PATH + '/' + photo,
-    };
   }
+  const { id, name, email, roles, photo } = data as UserModel;
+  return {
+    id,
+    name,
+    email,
+    roles: roles.map((el: any) => el.name),
+    photo: env.S3.PATH + '/' + photo,
+  };
 };
 
 export interface UserRequestDto {

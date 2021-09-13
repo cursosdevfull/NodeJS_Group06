@@ -17,8 +17,7 @@ export const mappingMedicDto = (
       accum.push({ id, fullName: `${name} ${lastname}`, identifier });
       return accum;
     }, []);
-  } else {
-    const { id, name, lastname, identifier } = data as MedicModel;
-    return { id, fullName: `${name} ${lastname}`, identifier };
   }
+  const { id, name, lastname, identifier } = data as MedicModel;
+  return { id, fullName: `${name} ${lastname}`, identifier };
 };

@@ -10,8 +10,7 @@ export class ResponseDto {
   ): Result<T> {
     if (total) {
       return { trace: { traceId, channelId, name }, payload: { data, total } };
-    } else {
-      return { trace: { traceId, channelId, name }, payload: { data } };
     }
+    return { trace: { traceId, channelId, name }, payload: { data } };
   }
 }

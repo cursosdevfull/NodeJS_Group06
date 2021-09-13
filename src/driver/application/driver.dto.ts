@@ -23,9 +23,7 @@ export const mappingDriverDto = (
       });
       return accum;
     }, []);
-  } else {
-    const { id, name, lastname, driverLicense, isoCountry } =
-      data as DriverModel;
-    return { id, fullName: `${name} ${lastname}`, driverLicense, isoCountry };
   }
+  const { id, name, lastname, driverLicense, isoCountry } = data as DriverModel;
+  return { id, fullName: `${name} ${lastname}`, driverLicense, isoCountry };
 };

@@ -5,6 +5,7 @@ export const mergeParameters = () => {
     console.log('read parameters', req.body);
     let parameters = {};
 
+    /* eslint no-prototype-builtins: "off" */
     if (req.hasOwnProperty('params')) {
       parameters = { ...req.params, ...parameters };
     }
