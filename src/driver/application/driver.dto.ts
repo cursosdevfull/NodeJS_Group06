@@ -14,12 +14,11 @@ export const mappingDriverDto = (
 
   if (isArray) {
     return (data as DriverModel[]).reduce((accum, driver) => {
-      const { id, name, lastname, driverLicense, isoCountry } = driver;
       accum.push({
-        id,
-        fullName: `${name} ${lastname}`,
-        driverLicense,
-        isoCountry,
+        id: driver.id,
+        fullName: `${driver.name} ${driver.lastname}`,
+        driverLicense: driver.driverLicense,
+        isoCountry: driver.isoCountry,
       });
       return accum;
     }, []);

@@ -13,6 +13,9 @@ console.log(env.S3.BUCKET_NAME);
 export class UploadMiddleware {
   static S3(fieldName: string, ...mimeTypesAllowed: string[]) {
     return multer({
+      limits: {
+        fileSize: 8000000,
+      },
       storage: multer_s3({
         s3: S3,
         bucket: env.S3.BUCKET_NAME,

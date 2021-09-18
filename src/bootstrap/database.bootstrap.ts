@@ -36,9 +36,9 @@ export class DatabaseBootstrap implements IServerBootstrap {
     await promise;
   }
 
-  closeConnection(): void {
+  async closeConnection(): Promise<void> {
     try {
-      client.close();
+      await client.close();
     } catch (error) {}
   }
 }

@@ -4,3 +4,4 @@ reports
 dist
 public/**/*.pdf
 proyecto*
+.scannerwork
