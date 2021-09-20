@@ -7,5 +7,5 @@ export interface UserModel {
   password: string;
   photo: string;
   refreshToken: string;
-  roles: RoleModel[];
+  roles: RoleModel[] | number[];
 }

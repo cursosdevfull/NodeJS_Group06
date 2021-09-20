@@ -7,9 +7,18 @@ import { validator } from '../../shared/helpers/validator.handler';
 import { UploadMiddleware } from '../../shared/middlewares/upload.middleware';
 import { UserController } from './user.controller';
 import { schemas } from './user.schema';
+import { RoleRepository } from '../../role/application/role.repository';
+import { RoleOperation } from '../../role/infraestructure/role.operation';
+import { UserRepository } from '../application/user.repository';
+import { UserOperation } from '../infraestructure/user.operation';
+import { UserUseCase } from '../application/user.usecase';
+
+const userOperation: UserRepository = new UserOperation();
+const roleOperation: RoleRepository = new RoleOperation();
+const userUseCase = new UserUseCase(userOperation, roleOperation);
 
 const route = express.Router();
-const userController = new UserController();
+const userController = new UserController(userUseCase);
 
 route.get(
   '/',
@@ -19,7 +28,7 @@ route.get(
 );
 route.post(
   '/',
-  UploadMiddleware.S3('photo', 'image/gif', 'image/png', 'image/jpeg'),
+  //UploadMiddleware.S3('photo', 'image/gif', 'image/png', 'image/jpeg'),
   mergeParameters(),
   validator(schemas.INSERT),
   ErrorHandler.asyncError(userController.insert)

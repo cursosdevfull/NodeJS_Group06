@@ -62,7 +62,7 @@ export abstract class OperationRepository<T> {
     try {
       const repository: Repository<T> = getRepository(this.entity);
       const data: T = await repository.save(entity);
-      console.log('data', data);
+     
       return data;
     } catch (error) {
       console.log(error.message);

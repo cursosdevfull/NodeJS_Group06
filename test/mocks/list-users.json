@@ -1,0 +1,32 @@
+{
+  "trace": {
+    "traceId": "0d50258d-ac40-48a0-bf1f-bc87147c403d",
+    "channelId": 1,
+    "name": "UserUseCase, List"
+  },
+  "payload": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Sergio",
+        "email": "sergio@correo.com",
+        "roles": ["ADMIN", "OPERATOR"],
+        "photo": "https://nodejs06.s3.us-east-2.amazonaws.com//user.png"
+      },
+      {
+        "id": 2,
+        "name": "Caros",
+        "email": "carlos@correo.com",
+        "roles": ["ADMIN"],
+        "photo": "https://nodejs06.s3.us-east-2.amazonaws.com//user02.png"
+      },
+      {
+        "id": 3,
+        "name": "Andrea",
+        "email": "andrea@correo.com",
+        "roles": ["OPERATOR"],
+        "photo": "https://nodejs06.s3.us-east-2.amazonaws.com//user03.png"
+      }
+    ]
+  }
+}

@@ -2,6 +2,7 @@ import { UserModel } from '../../user/domain/user.model';
 import { AuthRepository } from './auth.repository';
 import { Tokens } from './tokens.interface';
 import { UserService } from '../../user/application/user.service';
+import { RoleModel } from '../../role/domain/role.model';
 
 export class AuthUseCase {
   constructor(private authRepository: AuthRepository) {}
@@ -22,7 +23,7 @@ export class AuthUseCase {
         const accessToken = UserService.generateAccessToken(
           user.name,
           user.photo,
-          user.roles.map((role) => role.name)
+          (user.roles as RoleModel[]).map((role) => role.name)
         );
 
         return { accessToken, refreshToken: user.refreshToken };
@@ -43,7 +44,7 @@ export class AuthUseCase {
       const accessToken = UserService.generateAccessToken(
         user.name,
         user.photo,
-        user.roles.map((role) => role.name)
+        (user.roles as RoleModel[]).map((role) => role.name)
       );
       return { accessToken, refreshToken: user.refreshToken };
     }

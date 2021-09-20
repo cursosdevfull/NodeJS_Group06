@@ -13,8 +13,6 @@ export class AuthenticationGuard {
       if (partsAuthentication.length > 1) {
         const accessToken = partsAuthentication[1];
 
-        console.log('accessToken', accessToken);
-
         UserService.validateAccessToken(accessToken).then(
           (payload) => {
             response.locals.payload = payload;

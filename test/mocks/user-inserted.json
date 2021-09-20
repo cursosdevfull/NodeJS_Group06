@@ -1,0 +1,12 @@
+{
+  "name": "Carlos",
+  "email": "carlos@correo.com",
+  "password": "$2a$10$kPTkb0NV4JCibNHstInXr.o0X9A8TG3vlFcdsss2oOxFhf.9ZWWBS",
+  "photo": "user01.png",
+  "roles": [
+    { "id": 1, "name": "ADMIN" },
+    { "id": 2, "name": "OPERATOR" }
+  ],
+  "refreshToken": "8037bda3-1573-4851-a289-3002ed0edab6",
+  "id": 2
+}

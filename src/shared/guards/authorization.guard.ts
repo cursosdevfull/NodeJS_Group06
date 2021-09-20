@@ -4,7 +4,6 @@ import { IError } from '../helpers/errors.handler';
 export class AuthorizationGuard {
   static canActivate(...rolesAllowed: string[]) {
     return (req: Request, res: Response, next: NextFunction) => {
-      console.log('payload', res.locals.payload);
       const { roles } = res.locals.payload;
 
       const userAuthorizated = this.isUserAuthorizated(roles, rolesAllowed);

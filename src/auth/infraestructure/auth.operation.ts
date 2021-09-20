@@ -20,7 +20,7 @@ export class AuthOperation implements AuthRepository {
       where,
       relations,
     });
-    console.log('data', data);
+
     return data;
   }
 }

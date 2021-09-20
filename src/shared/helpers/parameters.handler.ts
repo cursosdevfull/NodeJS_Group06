@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 
 export const mergeParameters = () => {
   return (req: Request, res: Response, next: NextFunction) => {
-    console.log('read parameters', req.body);
     let parameters = {};
 
     /* eslint no-prototype-builtins: "off" */

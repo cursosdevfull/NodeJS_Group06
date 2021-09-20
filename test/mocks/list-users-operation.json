@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Sergio",
+    "email": "sergio@correo.com",
+    "password": "$2a$10$1m5lB31vy5uHEcjVxVUbEetNRlDCj5gTjhIWR5hE/CMhlp2Z61iGm",
+    "photo": "user.png",
+    "refreshToken": "972b2306-c3b3-4481-b6f9-81f1309ba433",
+    "roles": [
+      { "id": 1, "name": "ADMIN" },
+      { "id": 2, "name": "OPERATOR" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Andrea",
+    "email": "andrea@correo.com",
+    "password": "$2a$10$1m5lB31vy5uHEcjVxVUbEetNRlDCj5gTjhIWR5hE/CMhlp2Z61iGm",
+    "photo": "user02.png",
+    "refreshToken": "972b2306-c3b3-4481-b6f9-81f1309ba433",
+    "roles": [{ "id": 2, "name": "OPERATOR" }]
+  },
+  {
+    "id": 3,
+    "name": "Javier",
+    "email": "javier@correo.com",
+    "password": "$2a$10$1m5lB31vy5uHEcjVxVUbEetNRlDCj5gTjhIWR5hE/CMhlp2Z61iGm",
+    "photo": "user03.png",
+    "refreshToken": "972b2306-c3b3-4481-b6f9-81f1309ba433",
+    "roles": [{ "id": 1, "name": "ADMIN" }]
+  }
+]

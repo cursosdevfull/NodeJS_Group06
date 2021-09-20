@@ -1,0 +1,16 @@
+{
+  "trace": {
+    "traceId": "3d381b15-332f-48b6-90c3-4af0a43efa9a",
+    "channelId": 1,
+    "name": "UserUseCase, Insert"
+  },
+  "payload": {
+    "data": {
+      "id": 2,
+      "name": "Carlos",
+      "email": "carlos@correo.com",
+      "photo": "https://nodejs06.s3.us-east-2.amazonaws.com//user01.png",
+      "roles": ["ADMIN", "OPERATOR"]
+    }
+  }
+}

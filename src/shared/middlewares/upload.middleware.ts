@@ -8,7 +8,6 @@ AWS.config.update({ region: 'us-east-2' });
 
 const S3 = new AWS.S3();
 const env = yenv();
-console.log(env.S3.BUCKET_NAME);
 
 export class UploadMiddleware {
   static S3(fieldName: string, ...mimeTypesAllowed: string[]) {
@@ -26,7 +25,6 @@ export class UploadMiddleware {
         key(req: any, file, cb) {
           const mimeType = file.mimetype;
           const isFileAllowed = mimeTypesAllowed.includes(mimeType);
-          console.log('mimeType', mimeType);
 
           if (!isFileAllowed) {
             const error: IError = new Error('Invalid file type');

@@ -26,7 +26,6 @@ export class AuthController {
     };
 
     const result = await useCase.getNewAccessToken(user);
-    console.log('result', result);
 
     if (result) {
       return response.json(result);
