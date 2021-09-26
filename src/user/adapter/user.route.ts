@@ -12,6 +12,7 @@ import { RoleOperation } from '../../role/infraestructure/role.operation';
 import { UserRepository } from '../application/user.repository';
 import { UserOperation } from '../infraestructure/user.operation';
 import { UserUseCase } from '../application/user.usecase';
+import { CacheRedis } from '../../shared/middlewares/cache.middleware';
 
 const userOperation: UserRepository = new UserOperation();
 const roleOperation: RoleRepository = new RoleOperation();
@@ -24,11 +25,14 @@ route.get(
   '/',
   AuthenticationGuard.canActivate,
   AuthorizationGuard.canActivate('ADMIN'),
+  CacheRedis.handle('LIST_USERS'),
   ErrorHandler.asyncError(userController.list)
 );
 route.post(
   '/',
-  //UploadMiddleware.S3('photo', 'image/gif', 'image/png', 'image/jpeg'),
+  AuthenticationGuard.canActivate,
+  AuthorizationGuard.canActivate('ADMIN'),
+  UploadMiddleware.S3('photo', 'image/gif', 'image/png', 'image/jpeg'),
   mergeParameters(),
   validator(schemas.INSERT),
   ErrorHandler.asyncError(userController.insert)
@@ -44,7 +48,8 @@ route.get(
   '/:id',
   mergeParameters(),
   validator(schemas.GET_ONE),
-  ErrorHandler.asyncError(userController.getOne)
+  userController.getOne
+  //ErrorHandler.asyncError(userController.getOne)
 );
 
 route.put(

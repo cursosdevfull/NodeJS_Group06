@@ -5,6 +5,7 @@ import { route as RouteDriver } from './driver/adapter/driver.route';
 import { route as RouteRole } from './role/adapter/role.route';
 import { route as RouteAuth } from './auth/adapter/auth.route';
 import { ErrorHandler } from './shared/helpers/errors.handler';
+import { RedisBootstrap } from './bootstrap/redis.bootstrap';
 
 const app = express();
 app.disable('x-powered-by');
@@ -21,6 +22,11 @@ app.use('/roles', RouteRole);
 app.use('/auth', RouteAuth);
 
 app.get('/health', (req: Request, res: Response) => res.send('Todo está bien'));
+
+app.get('/invalidation-cache', async (req: Request, res: Response) => {
+  await RedisBootstrap.clear();
+  res.send('Cache invalidado');
+});
 
 // Manejo de excepciones
 

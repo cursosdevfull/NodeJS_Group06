@@ -29,12 +29,13 @@ export const mappingUserDto = (
       return accum;
     }, []);
   }
+  console.log('DATA', data);
   const { id, name, email, roles, photo } = data as UserModel;
   return {
     id,
     name,
     email,
-    roles: roles.map((el: any) => el.name),
+    roles: roles ? roles.map((el: any) => el.name) : [],
     photo: env.S3.PATH + '/' + photo,
   };
 };

@@ -43,7 +43,7 @@ export class ErrorHandler {
       message: error.message,
     };
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV !== 'production') {
       objError.stack = error.stack;
     }
 

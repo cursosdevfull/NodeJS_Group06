@@ -5,12 +5,23 @@ import { UserModel } from '../domain/user.model';
 
 import { Result } from '../../shared/application/result.repository';
 import { UserResponseDto } from '../application/user.dto';
+import { RedisBootstrap } from '../../bootstrap/redis.bootstrap';
 
 export class UserController {
-  constructor(private userUseCase: UserUseCase) {}
+  constructor(private userUseCase: UserUseCase) {
+    this.list = this.list.bind(this);
+    this.insert = this.insert.bind(this);
+    this.getOne = this.getOne.bind(this);
+    this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
+    this.getPage = this.getPage.bind(this);
+  }
 
   async list(request: Request, response: Response) {
     const result: Result<UserResponseDto> = await this.userUseCase.list();
+    console.log('Respuesta generada por MySQL');
+    RedisBootstrap.set(response.locals.cacheIdentifier, JSON.stringify(result));
+
     response.json(result);
   }
 

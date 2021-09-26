@@ -3,6 +3,7 @@ import Joi from 'joi';
 export const schemas = {
   GET_ONE: Joi.object({
     id: Joi.number().integer().required(),
+    authorization: Joi.string().required(),
   }),
 
   UPDATE: Joi.object({
@@ -28,5 +29,6 @@ export const schemas = {
     password: Joi.string().required(),
     photo: Joi.string().required(),
     roles: Joi.array().items(Joi.number()).required(),
+    authorization: Joi.string().required(),
   }),
 };
